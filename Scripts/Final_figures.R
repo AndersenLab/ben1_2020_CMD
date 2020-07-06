@@ -52,18 +52,19 @@ abzmedian.EXT_subtractedold <- abz_outprunedmut%>%
   geom_line(aes(x = numcon, y = meancondition, colour= fancy_strain), size = 1)+
   theme_cowplot(12)+
   scale_y_continuous(limits = c(-600,150))+
-  ylab("Optical density")+
-  scale_x_continuous(breaks = c(0,6.25,12.5,25,50,100,200),expand = c(0,0.5))+
+  ylab("Difference in OD")+
+  xlab("Concentration (µM)")+
+  scale_x_continuous(breaks = c(0,6.25,12.5,25,50,100),labels = c("0","6.25","12.5","25","50","100"),expand = c(0,0.5))+
   scale_fill_manual(name = "Strain", labels = c("N2" = "Suceptible","882"="Deletion","919"="F200Y","920"="F200Y", "1081" = "E198A","1082" = "E198A", "1075" = "F167Y","1076" = "F167Y", "1325" = "E198L","1326" = "E198L", "1327" = "E198V","1328" = "E198V"), values = cols)+
   scale_color_manual(name = "Strain", labels = c("N2" = "Suceptible","882"="Deletion","919"="F200Y","920"="F200Y", "1081" = "E198A","1082" = "E198A", "1075" = "F167Y","1076" = "F167Y", "1325" = "E198L","1326" = "E198L", "1327" = "E198V","1328" = "E198V"), values = cols)+
   theme(axis.title.x=element_blank(),
-        axis.text.x = element_blank(),
+        axis.text.x = element_text(size=12,face = "bold",angle = 90,vjust = 0.5,hjust=0.5,margin = unit(c(0,0,0,0),units = "in")),
         axis.text.y = element_text(size=12, face = "bold",margin = unit(c(0 ,0,0,0),units = "in")),
         axis.text.y.right = element_blank(),
         axis.ticks.y.right = element_blank(),
-        axis.ticks.x = element_blank(),
+        #axis.ticks.x = element_blank(),
         axis.ticks.y = element_line(size = 0.5),
-        axis.title.y=element_text(size=12,face = "bold",margin = unit(c(0,0.075,0,0),units = "in")),
+        axis.title.y=element_text(size=12,face = "bold"),
         legend.key.size = unit(1,"in"),
         legend.title = element_text(face = "bold"),
         legend.text = element_text(face = "bold"),
@@ -94,8 +95,8 @@ regressedabz_medianEXTold <-regressedabz_abzH%>%
   theme_cowplot(8)+
   scale_y_continuous(limits = c(-375, 225), sec.axis = dup_axis(name = "Albendazole"))+
   stat_pvalue_manual(abz_stats, label = "p.adj.signif",xmax="group1", y.position = c(150),remove.bracket = TRUE,size = 4)+
-  ylab(glue("Optical density"))+
-  scale_x_discrete(labels=c("N2" = "N2", "882" = "del","919" = "F200Y","1082"="E198A","1327"="E198V","1325"="E198L","1076"="F167Y"))+
+  ylab(glue("Normalized OD"))+
+  scale_x_discrete(labels=c("N2" = "N2", "882" = "Deletion","919" = "F200Y","1082"="E198A","1327"="E198V","1325"="E198L","1076"="F167Y"))+
   scale_fill_manual(name = "Strain", labels = c("N2" = "Suceptible","882"="Deletion","919"="F200Y","920"="F200Y", "920" = "F200Y", "1081" = "E198A","1082" = "E198A", "1075" = "F167Y","1076" = "F167Y", "1325" = "E198L","1326" = "E198L", "1327" = "E198V","1328" = "E198V"), values = cols)+
   scale_color_manual(name = "Strain", labels = c("N2" = "Suceptible","882"="Deletion","919"="F200Y","920"="F200Y", "920" = "F200Y", "1081" = "E198A","1082" = "E198A", "1075" = "F167Y","1076" = "F167Y", "1325" = "E198L","1326" = "E198L", "1327" = "E198V","1328" = "E198V"), values = cols)+
   theme(axis.title.x=element_blank(),
@@ -113,7 +114,6 @@ regressedabz_medianEXTold <-regressedabz_abzH%>%
         legend.position = "None")
 
 #Figure 1 C
-
 
 load("~/Desktop/ben1_2020_CMD/Processed_data/FBZv3_dose.RData")
 fbz_outpruned <- subtracted_dose_fbz
@@ -145,18 +145,19 @@ FBZmedian.EXT_subtractedold <-fbz_outprunedmut%>%
   geom_line(aes(x = numcon, y = meancondition, colour= fancy_strain), size = 1)+
   theme_cowplot(12)+
   scale_y_continuous(limits = c(-750,100))+
-  ylab("Optical density")+
+  ylab("Difference in OD")+
+  xlab("Concentration (µM)")+
   scale_x_continuous(breaks = c(0,6.25,12.5,25,50,100),labels = c("0","6.25","12.5","25","50","100"),expand = c(0,0.5))+
   scale_fill_manual(name = "Strain", labels = c("N2" = "Suceptible","882"="Deletion","919"="F200Y","920"="F200Y", "1081" = "E198A","1082" = "E198A", "1075" = "F167Y","1076" = "F167Y", "1325" = "E198L","1326" = "E198L", "1327" = "E198V","1328" = "E198V"), values = cols)+
   scale_color_manual(name = "Strain", labels = c("N2" = "Suceptible","882"="Deletion","919"="F200Y","920"="F200Y", "1081" = "E198A","1082" = "E198A", "1075" = "F167Y","1076" = "F167Y", "1325" = "E198L","1326" = "E198L", "1327" = "E198V","1328" = "E198V"), values = cols)+
-  theme(axis.title.x=element_blank(),
-        axis.text.x = element_text(size=12,face = "bold",angle = 90,hjust = 1,vjust = 1,margin = unit(c(0,0,0,0),units = "in")),
+  theme(axis.title.x = element_text(size=12, face = "bold",margin = unit(c(0 ,0,0,0),units = "in")),
+        axis.text.x = element_text(size=12,face = "bold",angle = 90,vjust = 0.5,hjust=0.5,margin = unit(c(0,0,0,0),units = "in")),
         axis.text.y = element_text(size=12, face = "bold",margin = unit(c(0 ,0,0,0),units = "in")),
         axis.text.y.right = element_blank(),
         axis.ticks.y.right = element_blank(),
-        axis.ticks.x = element_blank(),
+        #axis.ticks.x = element_blank(),
         axis.ticks.y = element_line(size = 0.5),
-        axis.title.y=element_text(size=12,face = "bold",margin = unit(c(0,0.075,0,0),units = "in")),
+        axis.title.y=element_text(size=12,face = "bold"),
         legend.key.size = unit(1,"in"),
         legend.title = element_text(face = "bold"),
         legend.text = element_text(face = "bold"),
@@ -187,10 +188,10 @@ regressedfbz_medianEXTold <-regressed_fbzH%>%
   geom_jitter(width = 0.1,size=0.1)+
   geom_boxplot(aes(fill=strain, alpha=0.1), outlier.shape = NA)+
   theme_cowplot(8)+
-  ylab(glue('Optical density'))+
+  ylab(glue('Normalized OD'))+
   scale_y_continuous(limits = c(-400,250),sec.axis = dup_axis(name = "Fenbendazole"))+
   stat_pvalue_manual(fbz_stats, label = "p.adj.signif",xmax="group1", y.position = c(225),remove.bracket = TRUE,size = 4)+
-  scale_x_discrete(labels=c("N2" = "N2", "882" = "del","920" = "F200Y","1082"="E198A","1327"="E198V","1325"="E198L","1076"="F167Y"))+
+  scale_x_discrete(labels=c("N2" = "N2", "882" = "Deletion","920" = "F200Y","1082"="E198A","1327"="E198V","1325"="E198L","1076"="F167Y"))+
   scale_fill_manual(name = "Strain", labels = c("N2" = "Suceptible","882"="Deletion","919"="F200Y","920"="F200Y", "920" = "F200Y", "1081" = "E198A","1082" = "E198A", "1075" = "F167Y","1076" = "F167Y", "1325" = "E198L","1326" = "E198L", "1327" = "E198V","1328" = "E198V"), values = cols)+
   scale_color_manual(name = "Strain", labels = c("N2" = "Suceptible","882"="Deletion","919"="F200Y","920"="F200Y", "920" = "F200Y", "1081" = "E198A","1082" = "E198A", "1075" = "F167Y","1076" = "F167Y", "1325" = "E198L","1326" = "E198L", "1327" = "E198V","1328" = "E198V"), values = cols)+
   theme(axis.title.x=element_blank(),
@@ -208,7 +209,7 @@ regressedfbz_medianEXTold <-regressed_fbzH%>%
         legend.position = "None")
 # Plot and save full figure 
 con_alleles <- cowplot::plot_grid(abzmedian.EXT_subtractedold,regressedabz_medianEXTold,FBZmedian.EXT_subtractedold,regressedfbz_medianEXTold,ncol=2,nrow=2,labels = c("A","B","C","D"),align = "vh",axis = "lrbt",label_size = 12,label_fontfamily = "Arial",rel_widths = c(1,1,1,1),rel_heights = c(1,1,1,1))
-ggsave("~/Desktop/ben1_2020_CMD/manuscript/figure_1.png",plot = con_alleles,device = "png",width = 7.5,height = 6,units = "in")
+ggsave("~/Desktop/ben1_2020_CMD/manuscript/figure_1.jpeg",plot = con_alleles,device = "jpeg",width = 7.5,height = 6,units = "in")
 
 ##Figure 2
 
@@ -244,18 +245,19 @@ abzmedian.EXT_subtractednew <- abz_outprunedmut%>%
   geom_line(aes(x = numcon, y = meancondition, colour= fancy_strain), size = 1)+
   theme_cowplot(12)+
   scale_y_continuous(limits = c(-600,150))+
-  ylab("Optical density")+
-  scale_x_continuous(breaks = c(0,6.25,12.5,25,50,100,200),expand = c(0,0.5))+
+  ylab("Difference in OD")+
+  xlab("Concentration (µM)")+
+  scale_x_continuous(breaks = c(0,6.25,12.5,25,50,100),labels = c("0","6.25","12.5","25","50","100"),expand = c(0,0.5))+
   scale_fill_manual(name = "Strain", labels = c("N2" = "Suceptible","882"="Deletion","919"="F200Y","920"="F200Y", "1081" = "E198A","1082" = "E198A", "1075" = "F167Y","1076" = "F167Y", "1325" = "E198L","1326" = "E198L", "1327" = "E198V","1328" = "E198V"), values = cols)+
   scale_color_manual(name = "Strain", labels = c("N2" = "Suceptible","882"="Deletion","919"="F200Y","920"="F200Y", "1081" = "E198A","1082" = "E198A", "1075" = "F167Y","1076" = "F167Y", "1325" = "E198L","1326" = "E198L", "1327" = "E198V","1328" = "E198V"), values = cols)+
   theme(axis.title.x=element_blank(),
-        axis.text.x = element_blank(),
-        axis.text.y = element_text(size=12, face = "bold",margin = unit(c(0 ,0,0,0),units = "in")),
+        axis.text.x = element_text(size=12,face = "bold",angle = 90,vjust = 0.5,hjust=0.5,margin = unit(c(0,0,0,0),units = "in")),
+        axis.text.y = element_text(size=12, face = "bold"),
         axis.text.y.right = element_blank(),
         axis.ticks.y.right = element_blank(),
-        axis.ticks.x = element_blank(),
+        #axis.ticks.x = element_blank(),
         axis.ticks.y = element_line(size = 0.5),
-        axis.title.y=element_text(size=12,face = "bold",margin = unit(c(0,0.075,0,0),units = "in")),
+        axis.title.y=element_text(size=12,face = "bold"),
         legend.key.size = unit(1,"in"),
         legend.title = element_text(face = "bold"),
         legend.text = element_text(face = "bold"),
@@ -286,8 +288,8 @@ regressedabz_medianEXTnew <-regressedabz_abzHN%>%
   theme_cowplot(8)+
   scale_y_continuous(limits = c(-400, 250), sec.axis = dup_axis(name = "Albendazole"))+
   stat_pvalue_manual(abz_stats, label = "p.adj.signif",xmax="group1", y.position = c(220),remove.bracket = TRUE,size = 4)+
-  ylab(glue("Optical density"))+
-  scale_x_discrete(labels=c("N2" = "N2", "882" = "del","919" = "F200Y","1082"="E198A","1327"="E198V","1325"="E198L","1076"="F167Y"))+
+  ylab(glue("Normalized OD"))+
+  scale_x_discrete(labels=c("N2" = "N2", "882" = "Deletion","919" = "F200Y","1082"="E198A","1327"="E198V","1325"="E198L","1076"="F167Y"))+
   scale_fill_manual(name = "Strain", labels = c("N2" = "Suceptible","882"="Deletion","919"="F200Y","920"="F200Y", "920" = "F200Y", "1081" = "E198A","1082" = "E198A", "1075" = "F167Y","1076" = "F167Y", "1325" = "E198L","1326" = "E198L", "1327" = "E198V","1328" = "E198V"), values = cols)+
   scale_color_manual(name = "Strain", labels = c("N2" = "Suceptible","882"="Deletion","919"="F200Y","920"="F200Y", "920" = "F200Y", "1081" = "E198A","1082" = "E198A", "1075" = "F167Y","1076" = "F167Y", "1325" = "E198L","1326" = "E198L", "1327" = "E198V","1328" = "E198V"), values = cols)+
   theme(axis.title.x=element_blank(),
@@ -337,18 +339,19 @@ FBZmedian.EXT_subtractednew <-fbz_outprunedmut%>%
   geom_line(aes(x = numcon, y = meancondition, colour= fancy_strain), size = 1)+
   theme_cowplot(12)+
   scale_y_continuous(limits = c(-750,100))+
-  ylab("Optical density")+
+  ylab("Difference in OD")+
+  xlab("Concentration (µM)")+
   scale_x_continuous(breaks = c(0,6.25,12.5,25,50,100),labels = c("0","6.25","12.5","25","50","100"),expand = c(0,0.5))+
   scale_fill_manual(name = "Strain", labels = c("N2" = "Suceptible","882"="Deletion","919"="F200Y","920"="F200Y", "1081" = "E198A","1082" = "E198A", "1075" = "F167Y","1076" = "F167Y", "1325" = "E198L","1326" = "E198L", "1327" = "E198V","1328" = "E198V"), values = cols)+
   scale_color_manual(name = "Strain", labels = c("N2" = "Suceptible","882"="Deletion","919"="F200Y","920"="F200Y", "1081" = "E198A","1082" = "E198A", "1075" = "F167Y","1076" = "F167Y", "1325" = "E198L","1326" = "E198L", "1327" = "E198V","1328" = "E198V"), values = cols)+
-  theme(axis.title.x=element_blank(),
-        axis.text.x = element_text(size=12,face = "bold",angle = 90,hjust = 1,vjust = 1,margin = unit(c(0,0,0,0),units = "in")),
-        axis.text.y = element_text(size=12, face = "bold",margin = unit(c(0 ,0,0,0),units = "in")),
+  theme(axis.title.x = element_text(size=12, face = "bold",margin = unit(c(0 ,0,0,0),units = "in")),
+        axis.text.x = element_text(size=12,face = "bold",angle = 90,vjust = 0.5,hjust=0.5,margin = unit(c(0,0,0,0),units = "in")),
+        axis.text.y = element_text(size=12, face = "bold"),
         axis.text.y.right = element_blank(),
         axis.ticks.y.right = element_blank(),
-        axis.ticks.x = element_blank(),
+        #axis.ticks.x = element_blank(),
         axis.ticks.y = element_line(size = 0.5),
-        axis.title.y=element_text(size=12,face = "bold",margin = unit(c(0,0.075,0,0),units = "in")),
+        axis.title.y=element_text(size=12,face = "bold"),
         legend.key.size = unit(1,"in"),
         legend.title = element_text(face = "bold"),
         legend.text = element_text(face = "bold"),
@@ -379,10 +382,10 @@ regressedfbz_medianEXTnew <-regressed_fbzHN%>%
   geom_jitter(width = 0.1,size=0.1)+
   geom_boxplot(aes(fill=strain, alpha=0.1), outlier.shape = NA)+
   theme_cowplot(8)+
-  ylab(glue('Optical density'))+
+  ylab(glue('Normalized OD'))+
   scale_y_continuous(limits = c(-400,250),sec.axis = dup_axis(name = "Fenbendazole"))+
   stat_pvalue_manual(fbz_stats, label = "p.adj.signif",xmax="group1", y.position = c(225),remove.bracket = TRUE,size = 4)+
-  scale_x_discrete(labels=c("N2" = "N2", "882" = "del","920" = "F200Y","1082"="E198A","1327"="E198V","1325"="E198L","1076"="F167Y"))+
+  scale_x_discrete(labels=c("N2" = "N2", "882" = "Deletion","920" = "F200Y","1082"="E198A","1327"="E198V","1325"="E198L","1076"="F167Y"))+
   scale_fill_manual(name = "Strain", labels = c("N2" = "Suceptible","882"="Deletion","919"="F200Y","920"="F200Y", "920" = "F200Y", "1081" = "E198A","1082" = "E198A", "1075" = "F167Y","1076" = "F167Y", "1325" = "E198L","1326" = "E198L", "1327" = "E198V","1328" = "E198V"), values = cols)+
   scale_color_manual(name = "Strain", labels = c("N2" = "Suceptible","882"="Deletion","919"="F200Y","920"="F200Y", "920" = "F200Y", "1081" = "E198A","1082" = "E198A", "1075" = "F167Y","1076" = "F167Y", "1325" = "E198L","1326" = "E198L", "1327" = "E198V","1328" = "E198V"), values = cols)+
   theme(axis.title.x=element_blank(),
@@ -401,7 +404,7 @@ regressedfbz_medianEXTnew <-regressed_fbzHN%>%
 ## Plot and save
 
 new_alleles <- cowplot::plot_grid(abzmedian.EXT_subtractednew,regressedabz_medianEXTnew,FBZmedian.EXT_subtractednew,regressedfbz_medianEXTnew,ncol=2,nrow=2,labels = c("A","B","C","D"),align = "hv",label_size = 12,label_fontfamily = "Arial",rel_widths = c(1,1,1,1),rel_heights = c(1,1,1,1))
-ggsave("~/Desktop/ben1_2020_CMD/manuscript/figure_2.png",plot = new_alleles,device = "png",width = 7.5,height = 6,units = "in")
+ggsave("~/Desktop/ben1_2020_CMD/manuscript/figure_2.jpeg",plot = new_alleles,device = "jpeg",width = 7.5,height = 6,units = "in")
 
 
 ## Figure 3
@@ -410,7 +413,9 @@ ggsave("~/Desktop/ben1_2020_CMD/manuscript/figure_2.png",plot = new_alleles,devi
 comp_data <- readr::read_tsv("~/Desktop/ben1_2020_CMD/Processed_data/compdata_full.tsv")
 comp_data$Allele_Freq <- as.numeric(comp_data$Allele_Freq)
 comp_data$Mean <- as.numeric(comp_data$Mean)
-cols <- c("N2" = "orange", "del" = "grey", "F200Y" = "Red", "E198V"= "Purple","E198L"="yellow","E198A"="blue","F167Y"="green")
+comp_data <- mutate(comp_data, Strain = case_when(Strain == "del" ~ "Deletion",
+                    TRUE ~ as.character(Strain)))
+cols <- c("N2" = "orange", "Deletion" = "grey", "F200Y" = "Red", "E198V"= "Purple","E198L"="yellow","E198A"="blue","F167Y"="green")
 x <- comp_data %>%
   dplyr::select(Strain,Allele_Freq,Condition,Generation,Rep,Mean)%>%
   na.omit()%>%
@@ -430,20 +435,20 @@ DMSO_comp <- x %>%
   dplyr::filter(Condition_f == "DMSO")%>%
   ggplot()+
   aes(x = Generation, y = Mean , fill = Condition_f, color = Strain) +
-  geom_errorbar(aes(ymin=Mean - SND, ymax=Mean + SND), width=1,size=1)+
+  geom_errorbar(aes(ymin=Mean - SND, ymax=Mean + SND), width=0.25,size=0.5)+
   geom_line(aes(linetype = Condition_f),size=1)+
-  geom_point()+
-  scale_color_manual(labels = c("N2"="N2","del" = "del","F200Y"="F200Y","E198V"="E198V","E198L"="E198L","E198A" = "E198A","F167Y"="F167Y"), values = cols)+
+  scale_color_manual(labels = c("N2"="N2","del" = "Deletion","F200Y"="F200Y","E198V"="E198V","E198L"="E198L","E198A" = "E198A","F167Y"="F167Y"), values = cols)+
   theme_cowplot(8)+
-  scale_y_continuous(breaks = c(0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1),limits = c(0.3,1.0))+
+  scale_y_continuous(breaks = c(0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1),limits = c(0,1.0))+
   scale_x_continuous(breaks = c(1,3,5,7))+
   ylab("Relative allele frequency")+
-  theme(axis.title.x=element_blank(),
-        axis.text.x = element_text(size = 12,face = "bold",margin = unit(c(0,0,0,0),units = "in")),
+  xlab("Generation")+
+  theme(axis.title.x=element_text(size = 12,face = "bold"),
+        axis.text.x = element_text(size = 12,face = "bold"),
         axis.text.y.right = element_blank(),
         axis.ticks.y.right = element_blank(),
         axis.ticks.y = element_blank(),
-        axis.ticks.x = element_blank(),
+        #axis.ticks.x = element_blank(),
         axis.text.y=element_text(size=12, face = "bold",margin = unit(c(0 ,0,0,0),units = "in")),
         axis.title.y=element_text(size = 12, face = "bold",margin = unit(c(0,0.075,0,0),units = "in")),
         legend.key.size = unit(0.4,"in"),
@@ -455,6 +460,8 @@ DMSO_comp <- x %>%
         legend.position = "None")
 #Figure 3 B
 fitness <- readr::read_tsv("~/Desktop/ben1_2020_CMD/Processed_data/fitness_fixed_full.txt")
+fitness <- mutate(fitness, Strain = case_when(Strain == "del" ~ "Deletion",
+                                                  TRUE ~ as.character(Strain)))
 Dfitness <- dplyr::filter(fitness,Condition == "D")
 dmso_stats <- aov(Fitness ~ Strain, data = Dfitness)%>%
   rstatix::tukey_hsd()%>%
@@ -467,7 +474,7 @@ dmso_stats <- aov(Fitness ~ Strain, data = Dfitness)%>%
   dplyr::filter(grepl("N2",group1) | grepl("N2",group2))
 DFIT <- fitness %>%
   dplyr::filter(Condition == "D")%>%
-  dplyr::mutate(fancy_strain=factor(Strain, levels = c("N2", "del","F200Y","E198A","F167Y","E198V","E198L")))%>%
+  dplyr::mutate(fancy_strain=factor(Strain, levels = c("N2", "Deletion","F200Y","E198A","F167Y","E198V","E198L")))%>%
   ggplot()+
   aes(x=fancy_strain, y=Fitness)+
   geom_hline(yintercept=0, linetype="dashed")+
@@ -475,12 +482,11 @@ DFIT <- fitness %>%
   geom_boxplot(aes(fill = Strain, alpha=0.1),outlier.shape = NA)+
   theme_cowplot(8)+
   stat_pvalue_manual(dmso_stats, label = "p.adj.signif",xmax="group1", y.position = c(0.15),remove.bracket = TRUE)+
-  ylab("Fitness")+
-  scale_x_discrete(labels = c("N2"="N2","del" = "del","F200Y"="F200Y","E198A" ="E198A","F167Y"="F167Y","E198L"="E198L","E198V"="E198V"))+
-  scale_color_manual(labels = c("N2"="N2","del" = "del","F200Y"="F200Y","E198V"="E198V"), values = cols)+
-  scale_fill_manual(labels = c("N2"="N2","del" = "del","F200Y"="F200Y","E198V"="E198V"), values = cols)+
+  ylab("Competitive Fitness")+
+  scale_x_discrete(labels = c("N2"="N2","del" = "Deletion","F200Y"="F200Y","E198A" ="E198A","F167Y"="F167Y","E198L"="E198L","E198V"="E198V"))+
+  scale_color_manual(labels = c("N2"="N2","del" = "Deletion","F200Y"="F200Y","E198V"="E198V"), values = cols)+
+  scale_fill_manual(labels = c("N2"="N2","del" = "Deletion","F200Y"="F200Y","E198V"="E198V"), values = cols)+
   theme(legend.position="none")+
-  ylab("Fitness")+
   xlab("Strain")+
   scale_y_continuous(sec.axis = dup_axis(name = "DMSO"))+
   theme(axis.title.x=element_blank(),
@@ -505,23 +511,23 @@ ABZ_comp <- x %>%
   dplyr::filter(Condition_f == "Albendazole")%>%
   ggplot()+
   aes(x = Generation, y = Mean , fill = Condition_f, color = Strain) +
-  geom_errorbar(aes(ymin=Mean - SND, ymax=Mean + SND), width=1,size=1)+
+  geom_errorbar(aes(ymin=Mean - SND, ymax=Mean + SND), width=0.25,size=0.5)+
   geom_line(aes(linetype = Condition_f), size=1)+ 
-  geom_point()+
-  scale_color_manual(labels = c("N2"="N2","del" = "del","F200Y"="F200Y","E198V"="E198V","E198L"="E198L","E198A" = "E198A","F167Y"="F167Y"), values = cols)+
+  scale_color_manual(labels = c("N2"="N2","del" = "Deletion","F200Y"="F200Y","E198V"="E198V","E198L"="E198L","E198A" = "E198A","F167Y"="F167Y"), values = cols)+
   theme_cowplot(8)+
-  scale_y_continuous(breaks = c(0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1),limits = c(0.3,1.0))+
+  scale_y_continuous(breaks = c(0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1),limits = c(0,1.0))+
   scale_x_continuous(breaks = c(1,3,5,7))+
   ylab("Relative allele frequency")+
+  xlab("Generation")+
   theme(axis.title.x=element_blank(),
-        axis.text.x = element_text(size = 12,face = "bold",margin = unit(c(0,0,0,0),units = "in")),
+        axis.text.x = element_text(size = 12,face = "bold"),
         axis.text.y.right = element_blank(),
         axis.ticks.y.right = element_blank(),
         axis.ticks.y = element_blank(),
         axis.text.y=element_text(size=12, face = "bold",margin = unit(c(0 ,0,0,0),units = "in")),
         axis.title.y=element_text(size = 12, face = "bold",margin = unit(c(0,0.075,0,0),units = "in")),
         legend.key.size = unit(0.4,"in"),
-        axis.ticks.x = element_blank(),
+        #axis.ticks.x = element_blank(),
         plot.title = element_blank(),
         panel.grid.minor = element_blank(),
         panel.grid.major = element_blank(),
@@ -551,7 +557,7 @@ A_F200YE198Vstats <- aov(Fitness ~ Strain, data = Afitness)%>%
   dplyr::filter(grepl("E198V",group1) , grepl("F200Y",group2))
 AFIT <- fitness %>%
   dplyr::filter(Condition == "A")%>%
-  dplyr::mutate(fancy_strain=factor(Strain, levels = c("N2", "del","F200Y","E198A","F167Y","E198V","E198L")))%>%
+  dplyr::mutate(fancy_strain=factor(Strain, levels = c("N2", "Deletion","F200Y","E198A","F167Y","E198V","E198L")))%>%
   ggplot()+
   aes(x=fancy_strain, y=Fitness)+
   geom_hline(yintercept=0, linetype="dashed")+
@@ -560,12 +566,12 @@ AFIT <- fitness %>%
   theme_cowplot(8)+
   stat_pvalue_manual(A_stats, label = "p.adj.signif",xmax="group1", y.position = c(0.75),remove.bracket = TRUE)+
   stat_pvalue_manual(A_F200YE198Vstats, label = "p.adj.signif",y.position = c(0.70), remove.bracket = FALSE)+
-  scale_x_discrete(labels = c("N2"="N2","del" = "del","F200Y"="F200Y","E198A" ="E198A","F167Y"="F167Y","E198L"="E198L","E198V"="E198V"))+
-  scale_color_manual(labels = c("N2"="N2","del" = "del","F200Y"="F200Y","E198V"="E198V"), values = cols)+
-  scale_fill_manual(labels = c("N2"="N2","del" = "del","F200Y"="F200Y","E198V"="E198V"), values = cols)+
+  scale_x_discrete(labels = c("N2"="N2","del" = "Deletion","F200Y"="F200Y","E198A" ="E198A","F167Y"="F167Y","E198L"="E198L","E198V"="E198V"))+
+  scale_color_manual(labels = c("N2"="N2","del" = "Deletion","F200Y"="F200Y","E198V"="E198V"), values = cols)+
+  scale_fill_manual(labels = c("N2"="N2","del" = "Deletion","F200Y"="F200Y","E198V"="E198V"), values = cols)+
   theme(legend.position="none")+
   scale_y_continuous(limits = c(-0.2,0.8),sec.axis = dup_axis(name = "Albendazole"))+
-  ylab("Fitness")+
+  ylab("Competitive Fitness")+
   xlab("Strain")+
   theme(axis.title.x=element_blank(),
         axis.text.x = element_text(size = 12,face = "bold", angle = 45,hjust = 1,vjust = 1,margin = unit(c(0,0,0,0),units = "in")),
@@ -585,7 +591,7 @@ AFIT <- fitness %>%
 
 ##Plot and Save
 competitionplot <- cowplot::plot_grid(ABZ_comp,AFIT,DMSO_comp,DFIT,nrow = 2,ncol = 2,labels = c("A","B","C","D"),align = "vh",axis = "lrbt",label_size = 12,label_fontfamily = "Arial",rel_widths = c(1,1,1,1),rel_heights = c(1,1,1,1))
-ggsave("~/Desktop/ben1_2020_CMD/manuscript/figure_3.png",plot = competitionplot,device = "png",width = 7.5,height = 6,units = "in")
+ggsave("~/Desktop/ben1_2020_CMD/manuscript/figure_3.jpeg",plot = competitionplot,device = "jpeg",width = 7.5,height = 6,units = "in")
 
 ### SUPPLEMENTAL FIGURES
 
@@ -646,9 +652,10 @@ fbz_strainsplit <- fbz_outprunedmut%>%
   aes(x=numcon, y = phenotype)+
   geom_line(aes(x = numcon, y = meancondition, colour = fancy_strain), size = 0.5)+
   theme_cowplot(12)+
-  xlab("Concentration fenbendazole")+
-  ylab("Normalized animal length")+
-  scale_x_continuous(breaks = c(0,6.25,12.5,25,50,100),expand = c(0,0.5))+
+  xlab("Fenbendazole concentration (µM)")+
+  ylab("Normalized OD")+
+  ylim(-850,150)+
+  scale_x_continuous(breaks = c(0,6.25,12.5,25,50,100),expand = c(0,0.5),labels = c("0","6.25","12.5","25","50","100"))+
   scale_fill_manual(name = "fancy_strain", labels = c("N2" = "Suceptible","882"="Deletion","919"="F200Y", "920" = "F200Y", "1081" = "E198A","1082" = "E198A", "1075" = "F167Y","1076" = "F167Y", "1325" = "E198L","1326" = "E198L", "1327" = "E198V","1328" = "E198V"), values = c("N2" = "orange","882"="grey","919"="red","920"="red","1325"="yellow","1326"="yellow","1327"="purple","1328"="purple","1082" = "blue","1081" = "blue", "1076" = "green","1075" = "green"))+
   scale_color_manual(name = "fancy_strain", labels = c("N2" = "Suceptible","882"="Deletion","919"="F200Y", "920" = "F200Y", "1081" = "E198A","1082" = "E198A", "1075" = "F167Y","1076" = "F167Y", "1325" = "E198L","1326" = "E198L", "1327" = "E198V","1328" = "E198V"), values = c("N2" = "orange","882"="grey","919"="red","920"="red","1325"="yellow","1326"="yellow","1327"="purple","1328"="purple","1082" = "blue","1081" = "blue", "1076" = "green","1075" = "green"))+
   facet_grid(rows = vars(fixedname))+
@@ -690,9 +697,10 @@ abz_strainsplit <- abz_outprunedmut%>%
   aes(x=numcon, y = phenotype)+
   geom_line(aes(x = numcon, y = meancondition, colour = fancy_strain), size = 0.5)+
   theme_cowplot(12)+
-  xlab("Concentration albendazole")+
-  ylab("Normalized animal length")+
-  scale_x_continuous(breaks = c(0,6.25,12.5,25,50,100),expand = c(0,0.5))+
+  xlab("Albendazole concentration (µM)")+
+  ylab("Difference in OD")+
+  ylim(-500,150)+
+  scale_x_continuous(breaks = c(0,6.25,12.5,25,50,100),expand = c(0,0.5),labels = c("0","6.25","12.5","25","50","100"))+
   scale_fill_manual(name = "fancy_strain", labels = c("N2" = "Suceptible","882"="Deletion","919"="F200Y", "920" = "F200Y", "1081" = "E198A","1082" = "E198A", "1075" = "F167Y","1076" = "F167Y", "1325" = "E198L","1326" = "E198L", "1327" = "E198V","1328" = "E198V"), values = c("N2" = "orange","882"="grey","919"="red","920"="red","1325"="yellow","1326"="yellow","1327"="purple","1328"="purple","1082" = "blue","1081" = "blue", "1076" = "green","1075" = "green"))+
   scale_color_manual(name = "fancy_strain", labels = c("N2" = "Suceptible","882"="Deletion","919"="F200Y", "920" = "F200Y", "1081" = "E198A","1082" = "E198A", "1075" = "F167Y","1076" = "F167Y", "1325" = "E198L","1326" = "E198L", "1327" = "E198V","1328" = "E198V"), values = c("N2" = "orange","882"="grey","919"="red","920"="red","1325"="yellow","1326"="yellow","1327"="purple","1328"="purple","1082" = "blue","1081" = "blue", "1076" = "green","1075" = "green"))+
   facet_grid(rows = vars(fixedname))+
@@ -703,38 +711,52 @@ abz_strainsplit <- abz_outprunedmut%>%
         axis.ticks.y.right = element_blank(),
         axis.ticks.x = element_line(size = 0.25),
         axis.ticks.y = element_line(size = 0.5),
-        axis.title.y=element_text(size=12,face = "bold",margin = unit(c(0,0.075,0,0),units = "in")),
+        axis.title.y=element_text(size=12,face = "bold"),
         axis.title.y.right=element_text(size=12,face = "bold", margin = unit(c(0,0,0,0.01),units = "in")),
         legend.key.size = unit(0.4,"in"),
         strip.background = element_blank(),
         strip.text = element_blank(),
         legend.title = element_text(face = "bold"),
         legend.text = element_text(face = "bold"),
-        plot.margin = unit(c(t=0.2, 0, 0, 0), "in"), 
         legend.position = "None")
 gridallele <- cowplot::plot_grid(abz_strainsplit,fbz_strainsplit, nrow = 1, ncol = 2,labels = c("A","B"),align = "vh",axis = "lrbt",label_size = 12,label_fontfamily = "Arial",rel_widths = c(1,1,1,1),rel_heights = c(1,1,1,1))
-ggsave(filename = "~/Desktop/ben1_2020_CMD/manuscript/Supplemental_figure_2.png", plot = gridallele, device = "png",units = "in",width = 7,height = 5)
+ggsave(filename = "~/Desktop/ben1_2020_CMD/manuscript/Supplemental_figure_3.jpeg", plot = gridallele, device = "jpeg",units = "in",width = 7,height = 5)
 
 ##Supplemental Figure 3 
 
 load("~/Desktop/ben1_2020_CMD/Processed_data/FBZv3_highrepA.RData")
+allele_Deletion <- rio::import("~/Desktop/ben1_2020_CMD/Processed_data/strain_allele.txt")
+allele_Deletion <- allele_Deletion %>%
+  dplyr::mutate(., group1 = as.character(group1))%>%
+  dplyr::mutate(., group2 = as.character(group2))
+bothfbz_stats <- aov(phenotype ~ strain, data = regressed_fbzHA)%>%
+  rstatix::tukey_hsd()%>%
+  dplyr::mutate(p.adj.signif = case_when(p.adj > 0.05 ~ "ns",
+                                         (p.adj < 0.05 & p.adj > 0.01) ~"*",
+                                         (p.adj < 0.01 & p.adj > 0.001) ~"**",
+                                         (p.adj < 0.001 & p.adj > 0.0001) ~"***",
+                                         (p.adj < 0.0001 & p.adj > 0.00001) ~"****",
+                                         (p.adj < 0.00001) ~ "*****"))%>%
+  dplyr::filter(grepl("N2",group1) | grepl("N2",group2))
 
 regressedfbz_medianEXT_bothalleles <-regressed_fbzHA%>%
   dplyr::filter(!is.na(strain))%>%
   dplyr::filter(trait == traita)%>%
-  dplyr::mutate(fancy_strain=factor(strain, levels = c("N2", "882","919","920","1081","1082","1075","1076","1327","1328", "1325","1326")))%>%
+  dplyr::mutate(fancy_strain=factor(strain, levels = c("N2", "882","920","1081","1082","1075","1076","1327","1328", "1325","1326")))%>%
   ggplot()+
   aes(x=fancy_strain, y = phenotype)+
   geom_jitter(width = 0.1,size=0.1)+
   geom_boxplot(aes(fill=strain, alpha=0.1), outlier.shape = NA)+
+  stat_pvalue_manual(bothfbz_stats, label = "p.adj.signif",xmax="group1", y.position = c(170),remove.bracket = TRUE)+
+  stat_pvalue_manual(allele_Deletion, label = "strain", xmax = "group2", y.position = c(220), remove.bracket = TRUE)+
   theme_cowplot(8)+
-  ylab(glue('Animal length'))+
-  scale_x_discrete(labels=c("N2" = "N2", "882" = "ean64","920" = "ean101","1081"="ean149","1082"="ean150","1327"="ean203","1328"="ean204","1325"="ean201","1326"="ean202","1075"="ean143","1076" = "ean144"))+
+  ylab(glue('Normalized OD'))+
+  scale_x_discrete(labels=c("N2" = "N2", "882" = expression(paste(italic("ean64"))),"920" = expression(italic("ean101")),"1081"=expression(italic("ean149")),"1082"=expression(italic("ean150")),"1327"=expression(italic("ean203")),"1328"=expression(italic("ean204")),"1325"=expression(italic("ean201")),"1326"=expression(italic("ean202")),"1075"=expression(italic("ean143")),"1076" = expression(italic("ean144"))))+
   scale_fill_manual(name = "fancy_strain", labels = c("N2" = "Suceptible","882"="Deletion","919"="F200Y","920"="F200Y", "920" = "F200Y", "1081" = "E198A","1082" = "E198A", "1075" = "F167Y","1076" = "F167Y", "1325" = "E198L","1326" = "E198L", "1327" = "E198V","1328" = "E198V"), values = c("N2" = "orange","882"="grey","919"="red","920"="red","1325"="yellow","1326"="yellow","1327"="purple","1328"="purple","1082" = "blue","1081" = "blue", "1076" = "green","1075" = "green"))+
   theme(axis.title.x=element_blank(),
         axis.text.x = element_text(size=12,face = "bold",angle = 45,hjust = 1,vjust = 1,margin = unit(c(0,0,0,0),units = "in")),
-        axis.text.y = element_text(size=12, face = "bold",margin = unit(c(0 ,0,0,0),units = "in")),
-        axis.title.y=element_text(size = 12,face = "bold",margin = unit(c(0,0.075,0,0),units = "in")),
+        axis.text.y = element_text(size=12, face = "bold"),
+        axis.title.y=element_text(size = 12,face = "bold"),
         legend.key.size = unit(0.4,"in"),
         axis.text.y.right = element_blank(),
         axis.ticks.x = element_blank(),
@@ -742,10 +764,9 @@ regressedfbz_medianEXT_bothalleles <-regressed_fbzHA%>%
         axis.ticks.y.right = element_blank(),
         legend.title = element_text(face = "bold"),
         legend.text = element_text(face = "bold"),
-        plot.margin = unit(c(0.1, 0.1, 0.1, 0), "in"),
         legend.position = "None")
 
-ggsave("~/Desktop/ben1_2020_CMD/manuscript/Supplemental_figure_3.png",plot = regressedfbz_medianEXT_bothalleles,device = "png",width = 7.5,height = 4,units = "in")
+ggsave("~/Desktop/ben1_2020_CMD/manuscript/Supplemental_figure_4.jpeg",plot = regressedfbz_medianEXT_bothalleles,device = "jpeg",width = 7.5,height = 4,units = "in")
 
 ##Supplemental Figure 4
 
@@ -773,9 +794,10 @@ DMSOabz_medianEXT <-DMSOabz%>%
   geom_jitter(width = 0.1,size=0.1)+
   geom_boxplot(aes(fill=strain,alpha=0.1), outlier.shape = NA)+
   theme_cowplot(8)+
-  ylab(glue('Optical density'))+
-  scale_x_discrete(labels=c("N2" = "N2", "882" = "del","919" = "F200Y","1082"="E198A","1327"="E198V","1325"="E198L","1076"="F167Y"))+
-  scale_fill_manual(name = "Strain", labels = c("N2" = "Suceptible","882"="del","919"="F200Y","F200Y"="F200Y", "920" = "F200Y", "1081" = "E198A","1082" = "E198A", "1075" = "F167Y","1076" = "F167Y", "1325" = "E198L","1326" = "E198L", "1327" = "E198V","1328" = "E198V"), values = c("N2" = "orange","882"="grey","919"="red","920"="red","1325"="yellow","1326"="yellow","1327"="purple","1328"="purple","1082" = "blue","1081" = "blue", "1076" = "green","1075" = "green"))+
+  ylab(glue('OD'))+
+  stat_pvalue_manual(dmsoabz_stats, label = "p.adj.signif",xmax="group1", y.position = c(1550),remove.bracket = TRUE)+
+  scale_x_discrete(labels=c("N2" = "N2", "882" = "Deletion","919" = "F200Y","1082"="E198A","1327"="E198V","1325"="E198L","1076"="F167Y"))+
+  scale_fill_manual(name = "Strain", labels = c("N2" = "Suceptible","882"="Deletion","919"="F200Y","F200Y"="F200Y", "920" = "F200Y", "1081" = "E198A","1082" = "E198A", "1075" = "F167Y","1076" = "F167Y", "1325" = "E198L","1326" = "E198L", "1327" = "E198V","1328" = "E198V"), values = c("N2" = "orange","882"="grey","919"="red","920"="red","1325"="yellow","1326"="yellow","1327"="purple","1328"="purple","1082" = "blue","1081" = "blue", "1076" = "green","1075" = "green"))+
   theme(axis.title.x=element_blank(),
         axis.text.x = element_text(size=12, face = "bold",margin = unit(c(0 ,0,0,0),units = "in")),
         axis.ticks.x = element_blank(),
@@ -786,15 +808,27 @@ DMSOabz_medianEXT <-DMSOabz%>%
         axis.ticks.y.right = element_blank(),
         legend.title = element_text(face = "bold"),
         legend.text = element_text(face = "bold"),
-        plot.margin = unit(c(0.1, 0.1, 0, 0), "in"),
         legend.position = "None")
 
-ggsave("~/Desktop/ben1_2020_CMD/manuscript/Supplemental_figure_4.png",plot = DMSOabz_medianEXT,device = "png",width = 7.5,height = 4,units = "in")
+ggsave("~/Desktop/ben1_2020_CMD/manuscript/Supplemental_figure_2.jpeg",plot = DMSOabz_medianEXT,device = "jpeg",width = 7.5,height = 4,units = "in")
 
 
 ##Supplemental Figure 5
 
 load("~/Desktop/ben1_2020_CMD/Processed_data/EC50.RData")
+allele_F <- rio::import("~/Desktop/ben1_2020_CMD/Processed_data/strain_allele_F200Yfixed.txt")
+allele_F <- allele_F %>%
+  dplyr::mutate(., group1 = as.character(group1))%>%
+  dplyr::mutate(., group2 = as.character(group2))
+EC50_stats <- aov(EC50 ~ strain, data = collectEC)%>%
+  rstatix::tukey_hsd()%>%
+  dplyr::mutate(p.adj.signif = case_when(p.adj > 0.05 ~ "ns",
+                                         (p.adj < 0.05 & p.adj > 0.01) ~"*",
+                                         (p.adj < 0.01 & p.adj > 0.001) ~"**",
+                                         (p.adj < 0.001 & p.adj > 0.0001) ~"***",
+                                         (p.adj < 0.0001 & p.adj > 0.00001) ~"****",
+                                         (p.adj < 0.00001) ~ "*****"))%>%
+  dplyr::filter(grepl("N2",group1) | grepl("N2",group2))
 
 EC50plot <-collectEC%>%
   dplyr::filter(!is.na(strain))%>%
@@ -804,10 +838,12 @@ EC50plot <-collectEC%>%
   ggplot()+
   aes(x=fancy_strain, y = EC50)+
   geom_jitter(width = 0.1,size=0.1)+
+  stat_pvalue_manual(EC50_stats, label = "p.adj.signif",xmax="group1", y.position = c(90),remove.bracket = TRUE)+
   geom_boxplot(aes(fill=strain, alpha=0.1), outlier.shape = NA)+
+  stat_pvalue_manual(allele_F, label = "strain", xmax = "group2", y.position = c(95), remove.bracket = TRUE)+
   theme_cowplot(8)+
   ylab(glue('EC50 µM FBZ'))+
-  scale_x_discrete(labels=c("N2" = "N2", "882" = "ean64","919" = "ean100","920" = "ean101","1081"="ean149","1082"="ean150","1327"="ean203","1328"="ean204","1325"="ean201","1326"="ean202","1075"="ean143","1076" = "ean144"))+
+  scale_x_discrete(labels=c("N2" = "N2", "882" = expression(paste(italic("ean64"))),"919"=expression(paste(italic("ean100"))),"920" = expression(italic("ean101")),"1081"=expression(italic("ean149")),"1082"=expression(italic("ean150")),"1327"=expression(italic("ean203")),"1328"=expression(italic("ean204")),"1325"=expression(italic("ean201")),"1326"=expression(italic("ean202")),"1075"=expression(italic("ean143")),"1076" = expression(italic("ean144"))))+
   scale_fill_manual(name = "fancy_strain", labels = c("N2" = "Suceptible","882"="Deletion","919"="F200Y","920"="F200Y", "920" = "F200Y", "1081" = "E198A","1082" = "E198A", "1075" = "F167Y","1076" = "F167Y", "1325" = "E198L","1326" = "E198L", "1327" = "E198V","1328" = "E198V"), values = c("N2" = "orange","882"="grey","919"="red","920"="red","1325"="yellow","1326"="yellow","1327"="purple","1328"="purple","1082" = "blue","1081" = "blue", "1076" = "green","1075" = "green"))+
   theme(axis.title.x=element_blank(),
         axis.text.x = element_text(size=12,face = "bold",angle = 45,hjust = 1,vjust = 1,margin = unit(c(0,0,0,0),units = "in")),
@@ -820,6 +856,5 @@ EC50plot <-collectEC%>%
         axis.ticks.y.right = element_blank(),
         legend.title = element_text(face = "bold"),
         legend.text = element_text(face = "bold"),
-        plot.margin = unit(c(0.1, 0.1, 0.1, 0), "in"),
         legend.position = "None")
-ggsave(filename = "~/Desktop/ben1_2020_CMD/manuscript/Supplemental_figure_5.png", plot = EC50plot,device = "png",width = 7.5,height = 4,units = "in")
+ggsave(filename = "~/Desktop/ben1_2020_CMD/manuscript/Supplemental_figure_5.jpeg", plot = EC50plot,device = "jpeg",width = 7.5,height = 4,units = "in")
