@@ -19,7 +19,7 @@ traita <- c("median.EXT")
 ##Figure 1
 #Figure 1 A
 
-load("~/Desktop/ben1_2020_CMD/Processed_data/ABZv3_dose.RData")
+load("~/Desktop/ben1_2020_CMD/Processed_data/S1.RData")
 abz_outpruned <- subtracted_dose
 
 abz_outprunedmut <- abz_outpruned%>%
@@ -71,7 +71,7 @@ abzmedian.EXT_subtractedold <- abz_outprunedmut%>%
         legend.position = "None")
 #Figure 1 B
 
-load("~/Desktop/ben1_2020_CMD/Processed_data/ABZv3_highrepO.RData")
+load("~/Desktop/ben1_2020_CMD/Processed_data/S2.RData")
 abz_stats <- aov(phenotype ~ strain, data = regressedabz_abzH)%>%
   rstatix::tukey_hsd()%>%
   dplyr::mutate(p.adj.signif = case_when(p.adj > 0.05 ~ "ns",
@@ -114,7 +114,7 @@ regressedabz_medianEXTold <-regressedabz_abzH%>%
 
 #Figure 1 C
 
-load("~/Desktop/ben1_2020_CMD/Processed_data/FBZv3_dose.RData")
+load("~/Desktop/ben1_2020_CMD/Processed_data/S4.RData")
 fbz_outpruned <- subtracted_dose_fbz
 
 fbz_outprunedmut <- fbz_outpruned%>%
@@ -165,7 +165,7 @@ FBZmedian.EXT_subtractedold <-fbz_outprunedmut%>%
 
 #Figure 1 D
 
-load("~/Desktop/ben1_2020_CMD/Processed_data/FBZv3_highrepO.RData")
+load("~/Desktop/ben1_2020_CMD/Processed_data/S5.RData")
 
 fbz_stats <- aov(phenotype ~ strain, data = regressed_fbzH)%>%
   rstatix::tukey_hsd()%>%
@@ -212,7 +212,7 @@ ggsave("~/Desktop/ben1_2020_CMD/manuscript/figure_1.jpeg",plot = con_alleles,dev
 
 ##Figure 2
 
-load("~/Desktop/ben1_2020_CMD/Processed_data/ABZv3_dose.RData")
+load("~/Desktop/ben1_2020_CMD/Processed_data/S1.RData")
 abz_outpruned <- subtracted_dose
 
 abz_outprunedmut <- abz_outpruned%>%
@@ -264,7 +264,7 @@ abzmedian.EXT_subtractednew <- abz_outprunedmut%>%
         legend.position = "None")
 #Figure 2 B
 
-load("~/Desktop/ben1_2020_CMD/Processed_data/ABZv3_highrepN.RData")
+load("~/Desktop/ben1_2020_CMD/Processed_data/S3.RData")
 abz_stats <- aov(phenotype ~ strain, data = regressedabz_abzHN)%>%
   rstatix::tukey_hsd()%>%
   dplyr::mutate(p.adj.signif = case_when(p.adj > 0.05 ~ "ns",
@@ -308,7 +308,7 @@ regressedabz_medianEXTnew <-regressedabz_abzHN%>%
 #Figure 2 C
 
 
-load("~/Desktop/ben1_2020_CMD/Processed_data/FBZv3_dose.RData")
+load("~/Desktop/ben1_2020_CMD/Processed_data/S4.RData")
 fbz_outpruned <- subtracted_dose_fbz
 
 fbz_outprunedmut <- fbz_outpruned%>%
@@ -359,7 +359,7 @@ FBZmedian.EXT_subtractednew <-fbz_outprunedmut%>%
 
 #Figure 2 D
 
-load("~/Desktop/ben1_2020_CMD/Processed_data/FBZv3_highrepN.RData")
+load("~/Desktop/ben1_2020_CMD/Processed_data/S6.RData")
 
 fbz_stats <- aov(phenotype ~ strain, data = regressed_fbzHN)%>%
   rstatix::tukey_hsd()%>%
@@ -409,7 +409,7 @@ ggsave("~/Desktop/ben1_2020_CMD/manuscript/figure_2.jpeg",plot = new_alleles,dev
 ## Figure 3
 
 #Figure 3 A
-comp_data <- readr::read_tsv("~/Desktop/ben1_2020_CMD/Processed_data/compdata_full.tsv")
+comp_data <- readr::read_tsv("~/Desktop/ben1_2020_CMD/Processed_data/S10.tsv")
 comp_data$Allele_Freq <- as.numeric(comp_data$Allele_Freq)
 comp_data$Mean <- as.numeric(comp_data$Mean)
 comp_data <- mutate(comp_data, Strain = case_when(Strain == "del" ~ "Deletion",
@@ -458,7 +458,7 @@ DMSO_comp <- x %>%
         plot.margin = unit(c(0.1, 0.1, 0.1, 0.1), "in"),
         legend.position = "None")
 #Figure 3 B
-fitness <- readr::read_tsv("~/Desktop/ben1_2020_CMD/Processed_data/fitness_fixed_full.txt")
+fitness <- readr::read_tsv("~/Desktop/ben1_2020_CMD/Processed_data/S11.txt")
 fitness <- mutate(fitness, Strain = case_when(Strain == "del" ~ "Deletion",
                                                   TRUE ~ as.character(Strain)))
 Dfitness <- dplyr::filter(fitness,Condition == "D")
@@ -595,7 +595,7 @@ ggsave("~/Desktop/ben1_2020_CMD/manuscript/figure_3.jpeg",plot = competitionplot
 ### SUPPLEMENTAL FIGURES
 
 ## Supplemental Figure 2
-load("~/Desktop/ben1_2020_CMD/Processed_data/ABZv3_dose.RData")
+load("~/Desktop/ben1_2020_CMD/Processed_data/S1.RData")
 abz_outpruned <- subtracted_dose
 
 abz_outprunedmut <- abz_outpruned%>%
@@ -612,7 +612,7 @@ abz_outprunedmut <- abz_outpruned%>%
   dplyr::mutate(meancondition = mean(sub_cntrl))%>%
   dplyr::mutate(SND = sd(sub_cntrl))
 
-load("~/Desktop/ben1_2020_CMD/Processed_data/FBZv3_dose.RData")
+load("~/Desktop/ben1_2020_CMD/Processed_data/S4.RData")
 fbz_outpruned <- subtracted_dose_fbz
 
 fbz_outprunedmut <- fbz_outpruned%>%
@@ -723,8 +723,8 @@ ggsave(filename = "~/Desktop/ben1_2020_CMD/manuscript/Supplemental_figure_3.jpeg
 
 ##Supplemental Figure 3 
 
-load("~/Desktop/ben1_2020_CMD/Processed_data/FBZv3_highrepA.RData")
-allele_Deletion <- rio::import("~/Desktop/ben1_2020_CMD/Processed_data/strain_allele.txt")
+load("~/Desktop/ben1_2020_CMD/Processed_data/S7.RData")
+allele_Deletion <- rio::import("~/Desktop/ben1_2020_CMD/Processed_data/S12.txt")
 allele_Deletion <- allele_Deletion %>%
   dplyr::mutate(., group1 = as.character(group1))%>%
   dplyr::mutate(., group2 = as.character(group2))
@@ -769,7 +769,7 @@ ggsave("~/Desktop/ben1_2020_CMD/manuscript/Supplemental_figure_4.jpeg",plot = re
 
 ##Supplemental Figure 4
 
-load("~/Desktop/ben1_2020_CMD/Processed_data/DMSOABZ.RData")
+load("~/Desktop/ben1_2020_CMD/Processed_data/S8.RData")
 DMSOabz <- biopruned_abzH %>%
   dplyr::filter(strain %in% c("N2","882","919", "1076", "1082","1325", "1327"))%>%
   dplyr::filter(condition == "DMSO")
@@ -814,8 +814,8 @@ ggsave("~/Desktop/ben1_2020_CMD/manuscript/Supplemental_figure_2.jpeg",plot = DM
 
 ##Supplemental Figure 5
 
-load("~/Desktop/ben1_2020_CMD/Processed_data/EC50.RData")
-allele_F <- rio::import("~/Desktop/ben1_2020_CMD/Processed_data/strain_allele_F200Yfixed.txt")
+load("~/Desktop/ben1_2020_CMD/Processed_data/S9.RData")
+allele_F <- rio::import("~/Desktop/ben1_2020_CMD/Processed_data/S13.txt")
 allele_F <- allele_F %>%
   dplyr::mutate(., group1 = as.character(group1))%>%
   dplyr::mutate(., group2 = as.character(group2))
