@@ -4,13 +4,12 @@ library(dplyr)
 library(tidyverse)
 library(cowplot)
 library(mclust)
-source("~/Desktop/ben1_2020_CMD/Scripts/scripts.R")
 parafull <- c("N2","882","919","920","1075","1076","1081","1082","1325","1326","1327","1328")
 traita <- c("median.EXT")
 cols <- c("N2" = "orange","882"="grey","919"="red","920"="red","1325"="yellow","1326"="yellow","1327"="purple","1328"="purple","1082" = "blue","1081" = "blue", "1076" = "green","1075" = "green")
 
 ###Read in ABZ dose data from 20190617 
-dir <- c("~/Desktop/ben1_2020_CMD/Raw_data/20190617_ABZv3dose/")
+dir <- c("~/Desktop/ben1_2020_CMD/Raw_data/S1/")
 
 raw <- easysorter::read_data(dir)
 
@@ -42,7 +41,7 @@ rm(dir,biopruned,DMSO_pheno,out_pruned,raw,raw_noncontam,subtracted_dose,summedp
 
 ###Read and process ABZ high-replication canonical alleles
 
-dirs_abzH <- c("~/Dropbox/AndersenLab/LabFolders/Clay/2019_benzimidazole_paper/Raw_data/20200130_ABZV3A/","~/Dropbox/AndersenLab/LabFolders/Clay/2019_benzimidazole_paper/Raw_data/20200130_ABZV3B/","~/Dropbox/AndersenLab/LabFolders/Clay/2019_benzimidazole_paper/Raw_data/20200131_ABZV3C/","~/Dropbox/AndersenLab/LabFolders/Clay/2019_benzimidazole_paper/Raw_data/20200131_ABZV3D/")
+dirs_abzH <- list.files("S3",full.names = TRUE)
 raw_abzH <- easysorter::read_data(dirs_abzH)
 
 raw_noncontam_abzH <- easysorter::remove_contamination(raw_abzH)
@@ -66,7 +65,7 @@ save(regressedabz_abzH,file = "~/Desktop/ben1_2020_CMD/Processed_data/ABZv3_high
 
 ###Read in FBZ dose from 20190618
 
-dir_fbz <- c("~/Desktop/ben1_2020_CMD/Raw_data/20190618_FBZv3dose/")
+dir_fbz <- c("~/Desktop/ben1_2020_CMD/Raw_data/S2/")
 
 raw_fbz <- easysorter::read_data(dir_fbz)
 
@@ -98,7 +97,7 @@ rm(dir_fbz,biopruned_fbz,DMSO_pheno_fbz,out_pruned_fbz,raw_fbz,raw_noncontam_fbz
 
 ### Read and process FBZ high-replication old alleles
 
-dir_fbzH <- c("~/Desktop/ben1_2020_CMD/Raw_data/20190606_FBZ_V3/")
+dir_fbzH <- c("~/Desktop/ben1_2020_CMD/Raw_data/S4/")
 
 raw_fbzH <- easysorter::read_data(dir_fbzH)
 
@@ -118,8 +117,9 @@ save(regressed_fbzH, file = "~/Desktop/ben1_2020_CMD/Processed_data/FBZv3_highre
 
 ### Read and process ABZ high-replication new alleles 
  
-dirs_abzHN <- c("~/Dropbox/AndersenLab/LabFolders/Clay/2019_benzimidazole_paper/Raw_data/20200130_ABZV3A/","~/Dropbox/AndersenLab/LabFolders/Clay/2019_benzimidazole_paper/Raw_data/20200130_ABZV3B/","~/Dropbox/AndersenLab/LabFolders/Clay/2019_benzimidazole_paper/Raw_data/20200131_ABZV3C/","~/Dropbox/AndersenLab/LabFolders/Clay/2019_benzimidazole_paper/Raw_data/20200131_ABZV3D/")
+dirs_abzHN <- list.files("S3", full.names = TRUE)
 raw_abzHN <- easysorter::read_data(dirs_abzHN)
+
 
 raw_noncontam_abzHN <- easysorter::remove_contamination(raw_abzHN)
 
@@ -141,7 +141,7 @@ save(regressedabz_abzHN,file = "~/Desktop/ben1_2020_CMD/Processed_data/ABZv3_hig
 
 ### Read and process FBZ high-replication new alleles 
 
-dir_fbzHN <- c("~/Desktop/ben1_2020_CMD/Raw_data/20190606_FBZ_V3/")
+dir_fbzHN <- c("~/Desktop/ben1_2020_CMD/Raw_data/S4/")
 
 raw_fbzHN <- easysorter::read_data(dir_fbzHN)
 
@@ -229,3 +229,4 @@ regressed_fbzHA <- biopruned_fbzH%>%
   easysorter::regress(.,assay = FALSE)%>%
   dplyr::filter(trait == traita)
 save(regressed_fbzHA, file = "~/Desktop/ben1_2020_CMD/Processed_data/FBZv3_highrepA.RData")
+
