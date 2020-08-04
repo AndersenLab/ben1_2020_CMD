@@ -5,14 +5,17 @@ library(sjPlot)
 library(drc)
 library(ggpubr)
 library(glue)
-source("~/Dropbox/AndersenLab/LabFolders/Clay/2019_benzimidazole_paper/Scripts/theme.R")
+##Change these paths
+source("~/Documents/GitHub/ben1_2020_CMD/Scripts/theme.R")
+setwd("~/Documents/GitHub/ben1_2020_CMD/data/")
+
 parafull <- c("N2","882","919","920","1075","1076","1081","1082","1325","1326","1327","1328")
 para_con <- c("N2","882","919","1076","1082")
 para_new <- c("N2","882", "1325","1327")
-setwd("~/Desktop/ben1_2020_CMD/data/")
+setwd("~/Documents/GitHub/ben1_2020_CMD/data/")
 
 #Choose colors for strains 
-cols <- c("N2" = "orange","882"="grey","919"="red","920"="red","1325"="yellow","1326"="yellow","1327"="purple","1328"="purple","1082" = "blue","1081" = "blue", "1076" = "green","1075" = "green")
+cols <- c("N2" = "orange","882"="grey","919"="red","920"="red","1325"="yellow","1326"="yellow","1327"="purple","1328"="purple","1082" = "blue","1081" = "blue", "1076" = "green","1075" = "green", "Deletion" = "grey", "F200Y" = "Red", "E198V"= "Purple","E198L"="yellow","E198A"="blue","F167Y"="green")
 para <- c("N2","882","919","1082","1076","1325","1327")
 plate_1strains <- c("N2","882","919","920","1081","1082","1075","1076","1325","1326","1327","1328")
 traita <- c("median.EXT")
@@ -209,7 +212,7 @@ regressedfbz_medianEXTold <-regressed_fbzH%>%
         legend.position = "None")
 # Plot and save full figure 
 con_alleles <- cowplot::plot_grid(abzmedian.EXT_subtractedold,regressedabz_medianEXTold,FBZmedian.EXT_subtractedold,regressedfbz_medianEXTold,ncol=2,nrow=2,labels = c("A","B","C","D"),align = "vh",axis = "lrbt",label_size = 12,label_fontfamily = "Arial",rel_widths = c(1,1,1,1),rel_heights = c(1,1,1,1))
-ggsave("~/Desktop/ben1_2020_CMD/manuscript/figure_1.jpeg",plot = con_alleles,device = "jpeg",width = 7.5,height = 6,units = "in")
+ggsave("~/Documents/Github/ben1_2020_CMD/manuscript/figure_1.jpeg",plot = con_alleles,device = "jpeg",width = 7.5,height = 6,units = "in")
 
 ##Figure 2
 
@@ -404,7 +407,7 @@ regressedfbz_medianEXTnew <-regressed_fbzHN%>%
 ## Plot and save
 
 new_alleles <- cowplot::plot_grid(abzmedian.EXT_subtractednew,regressedabz_medianEXTnew,FBZmedian.EXT_subtractednew,regressedfbz_medianEXTnew,ncol=2,nrow=2,labels = c("A","B","C","D"),align = "hv",label_size = 12,label_fontfamily = "Arial",rel_widths = c(1,1,1,1),rel_heights = c(1,1,1,1))
-ggsave("~/Desktop/ben1_2020_CMD/manuscript/figure_2.jpeg",plot = new_alleles,device = "jpeg",width = 7.5,height = 6,units = "in")
+ggsave("~/Documents/Github/ben1_2020_CMD/manuscript/figure_2.jpeg",plot = new_alleles,device = "jpeg",width = 7.5,height = 6,units = "in")
 
 
 ## Figure 3
@@ -415,7 +418,6 @@ comp_data$Allele_Freq <- as.numeric(comp_data$Allele_Freq)
 comp_data$Mean <- as.numeric(comp_data$Mean)
 comp_data <- mutate(comp_data, Strain = case_when(Strain == "del" ~ "Deletion",
                     TRUE ~ as.character(Strain)))
-cols <- c("N2" = "orange", "Deletion" = "grey", "F200Y" = "Red", "E198V"= "Purple","E198L"="yellow","E198A"="blue","F167Y"="green")
 x <- comp_data %>%
   dplyr::select(Strain,Allele_Freq,Condition,Generation,Rep,Mean)%>%
   na.omit()%>%
@@ -591,7 +593,7 @@ AFIT <- fitness %>%
 
 ##Plot and Save
 competitionplot <- cowplot::plot_grid(ABZ_comp,AFIT,DMSO_comp,DFIT,nrow = 2,ncol = 2,labels = c("A","B","C","D"),align = "vh",axis = "lrbt",label_size = 12,label_fontfamily = "Arial",rel_widths = c(1,1,1,1),rel_heights = c(1,1,1,1))
-ggsave("~/Desktop/ben1_2020_CMD/manuscript/figure_3.jpeg",plot = competitionplot,device = "jpeg",width = 7.5,height = 6,units = "in")
+ggsave("~/Documents/Github/ben1_2020_CMD/manuscript/figure_3.jpeg",plot = competitionplot,device = "jpeg",width = 7.5,height = 6,units = "in")
 
 ### SUPPLEMENTAL FIGURES
 
@@ -720,7 +722,7 @@ abz_strainsplit <- abz_outprunedmut%>%
         legend.text = element_text(face = "bold"),
         legend.position = "None")
 gridallele <- cowplot::plot_grid(abz_strainsplit,fbz_strainsplit, nrow = 1, ncol = 2,labels = c("A","B"),align = "vh",axis = "lrbt",label_size = 12,label_fontfamily = "Arial",rel_widths = c(1,1,1,1),rel_heights = c(1,1,1,1))
-ggsave(filename = "~/Desktop/ben1_2020_CMD/manuscript/Supplemental_figure_3.jpeg", plot = gridallele, device = "jpeg",units = "in",width = 7,height = 5)
+ggsave(filename = "~/Documents/Github/ben1_2020_CMD/manuscript/Supplemental_figure_3.jpeg", plot = gridallele, device = "jpeg",units = "in",width = 7,height = 5)
 
 ##Supplemental Figure 3 
 
@@ -766,7 +768,7 @@ regressedfbz_medianEXT_bothalleles <-regressed_fbzHA%>%
         legend.text = element_text(face = "bold"),
         legend.position = "None")
 
-ggsave("~/Desktop/ben1_2020_CMD/manuscript/Supplemental_figure_4.jpeg",plot = regressedfbz_medianEXT_bothalleles,device = "jpeg",width = 7.5,height = 4,units = "in")
+ggsave("~/Documents/Github/ben1_2020_CMD/manuscript/Supplemental_figure_4.jpeg",plot = regressedfbz_medianEXT_bothalleles,device = "jpeg",width = 7.5,height = 4,units = "in")
 
 ##Supplemental Figure 4
 
@@ -810,7 +812,7 @@ DMSOabz_medianEXT <-DMSOabz%>%
         legend.text = element_text(face = "bold"),
         legend.position = "None")
 
-ggsave("~/Desktop/ben1_2020_CMD/manuscript/Supplemental_figure_2.jpeg",plot = DMSOabz_medianEXT,device = "jpeg",width = 7.5,height = 4,units = "in")
+ggsave("~/Documents/Github/ben1_2020_CMD/manuscript/Supplemental_figure_2.jpeg",plot = DMSOabz_medianEXT,device = "jpeg",width = 7.5,height = 4,units = "in")
 
 
 ##Supplemental Figure 5
@@ -914,4 +916,103 @@ EC50plot <-collectEC%>%
         legend.title = element_text(face = "bold"),
         legend.text = element_text(face = "bold"),
         legend.position = "None")
-ggsave(filename = "~/Desktop/ben1_2020_CMD/manuscript/Supplemental_figure_5.jpeg", plot = EC50plot,device = "jpeg",width = 7.5,height = 4,units = "in")
+ggsave(filename = "~/Documents/Github/ben1_2020_CMD/manuscript/Supplemental_figure_5.jpeg", plot = EC50plot,device = "jpeg",width = 7.5,height = 4,units = "in")
+
+##Supplemental Figure 6
+
+abz_outprunedmutnonnorm <- abz_outpruned%>%
+  dplyr::filter(condition != "200")%>%
+  dplyr::filter(trait == traita)%>%
+  dplyr::filter(strain %in% c("N2","882","919","1076","1082","1325","1327"))%>%
+  dplyr::mutate(numcon = case_when(condition == "DMSO" ~ 0,
+                                   condition == "6_25" ~ 6.25,
+                                   condition == "12_5" ~ 12.5,
+                                   condition == "25" ~ 25,
+                                   condition == "50" ~ 50,
+                                   condition == "100" ~ 100,
+                                   condition == "200" ~ 200))%>%
+  dplyr::group_by(strain, condition)%>%
+  dplyr::mutate(meancondition = mean(phenotype))%>%
+  dplyr::mutate(SND = sd(phenotype))
+
+abzmedian.EXT_subtractednonnorm <- abz_outprunedmutnonnorm%>%
+  dplyr::filter(!is.na(strain))%>%
+  dplyr::filter(strain %in% c("N2","919","920","882","1081","1082", "1075","1076","1325","1326","1327","1328"))%>%
+  dplyr::filter(condition != "200")%>%
+  dplyr::filter(numcon %in% c(0,6.25,12.5,25,50,100,200))%>%
+  dplyr::filter(trait == traita)%>%
+  dplyr::mutate(fancy_strain=factor(strain, levels = c("N2", "882","919","920","1081","1082","1327","1328", "1325","1326","1075","1076")))%>%
+  dplyr::mutate(con_fix = factor(condition, levels = c("DMSO","6_25","12_5","25","50","100","200")))%>%
+  ggplot()+
+  aes(x=numcon, y = meancondition)+
+  geom_errorbar(aes(color = fancy_strain, ymin=meancondition - SND, ymax=meancondition + SND), width=2, size = 1)+
+  geom_line(aes(x = numcon, y = meancondition, colour= fancy_strain), size = 1)+
+  theme_cowplot(12)+
+  scale_y_continuous(limits = c(250,1200))+
+  ylab("Optical density")+
+  xlab("Albendazole oncentration (µM)")+
+  scale_x_continuous(breaks = c(0,6.25,12.5,25,50,100),labels = c("0","6.25","12.5","25","50","100"),expand = c(0,0.5))+
+  scale_fill_manual(name = "Strain", labels = c("N2" = "Suceptible","882"="Deletion","919"="F200Y","920"="F200Y", "1081" = "E198A","1082" = "E198A", "1075" = "F167Y","1076" = "F167Y", "1325" = "E198L","1326" = "E198L", "1327" = "E198V","1328" = "E198V"), values = cols)+
+  scale_color_manual(name = "Strain", labels = c("N2" = "Suceptible","882"="Deletion","919"="F200Y","920"="F200Y", "1081" = "E198A","1082" = "E198A", "1075" = "F167Y","1076" = "F167Y", "1325" = "E198L","1326" = "E198L", "1327" = "E198V","1328" = "E198V"), values = cols)+
+  theme(axis.title.x=element_text(size=12, face = "bold",margin = unit(c(0 ,0,0,0),units = "in")),
+        axis.text.x = element_text(size=12,face = "bold",angle = 90,vjust = 0.5,hjust=0.5),
+        axis.text.y = element_text(size=12, face = "bold",margin = unit(c(0 ,0,0,0),units = "in")),
+        axis.text.y.right = element_blank(),
+        axis.ticks.y.right = element_blank(),
+        #axis.ticks.x = element_blank(),
+        axis.ticks.y = element_line(size = 0.5),
+        axis.title.y=element_text(size=12,face = "bold"),
+        legend.key.size = unit(1,"in"),
+        legend.title = element_text(face = "bold"),
+        legend.text = element_text(face = "bold"),
+        legend.position = "None")
+
+fbz_outprunedmutnonnorm <- fbz_outpruned%>%
+  dplyr::filter(condition != "200")%>%
+  dplyr::filter(trait == traita)%>%
+  dplyr::filter(strain %in% c("N2","882","919","1076","1082","1325","1327"))%>%
+  dplyr::mutate(numcon = case_when(condition == "DMSO" ~ 0,
+                                   condition == "6_25" ~ 6.25,
+                                   condition == "12_5" ~ 12.5,
+                                   condition == "25" ~ 25,
+                                   condition == "50" ~ 50,
+                                   condition == "100" ~ 100,
+                                   condition == "200" ~ 200))%>%
+  dplyr::group_by(strain, condition)%>%
+  dplyr::mutate(meancondition = mean(phenotype))%>%
+  dplyr::mutate(SND = sd(phenotype))
+
+fbzmedian.EXT_subtractednonnorm <- fbz_outprunedmutnonnorm%>%
+  dplyr::filter(!is.na(strain))%>%
+  dplyr::filter(strain %in% c("N2","919","920","882","1081","1082", "1075","1076","1325","1326","1327","1328"))%>%
+  dplyr::filter(condition != "200")%>%
+  dplyr::filter(numcon %in% c(0,6.25,12.5,25,50,100,200))%>%
+  dplyr::filter(trait == traita)%>%
+  dplyr::mutate(fancy_strain=factor(strain, levels = c("N2", "882","919","920","1081","1082","1327","1328", "1325","1326","1075","1076")))%>%
+  dplyr::mutate(con_fix = factor(condition, levels = c("DMSO","6_25","12_5","25","50","100","200")))%>%
+  ggplot()+
+  aes(x=numcon, y = meancondition)+
+  geom_errorbar(aes(color = fancy_strain, ymin=meancondition - SND, ymax=meancondition + SND), width=2, size = 1)+
+  geom_line(aes(x = numcon, y = meancondition, colour= fancy_strain), size = 1)+
+  theme_cowplot(12)+
+  scale_y_continuous(limits = c(250,1200))+
+  ylab("Optical density")+
+  xlab("Fenbendazole concentration (µM)")+
+  scale_x_continuous(breaks = c(0,6.25,12.5,25,50,100),labels = c("0","6.25","12.5","25","50","100"),expand = c(0,0.5))+
+  scale_fill_manual(name = "Strain", labels = c("N2" = "Suceptible","882"="Deletion","919"="F200Y","920"="F200Y", "1081" = "E198A","1082" = "E198A", "1075" = "F167Y","1076" = "F167Y", "1325" = "E198L","1326" = "E198L", "1327" = "E198V","1328" = "E198V"), values = cols)+
+  scale_color_manual(name = "Strain", labels = c("N2" = "Suceptible","882"="Deletion","919"="F200Y","920"="F200Y", "1081" = "E198A","1082" = "E198A", "1075" = "F167Y","1076" = "F167Y", "1325" = "E198L","1326" = "E198L", "1327" = "E198V","1328" = "E198V"), values = cols)+
+  theme(axis.title.x=element_text(size=12, face = "bold",margin = unit(c(0 ,0,0,0),units = "in")),
+        axis.text.x = element_text(size=12,face = "bold",angle = 90,vjust = 0.5,hjust=0.5),
+        axis.text.y = element_text(size=12, face = "bold",margin = unit(c(0 ,0,0,0),units = "in")),
+        axis.text.y.right = element_blank(),
+        axis.ticks.y.right = element_blank(),
+        #axis.ticks.x = element_blank(),
+        axis.ticks.y = element_line(size = 0.5),
+        axis.title.y=element_blank(),
+        legend.key.size = unit(1,"in"),
+        legend.title = element_text(face = "bold"),
+        legend.text = element_text(face = "bold"),
+        legend.position = "None")
+
+nonnormcurves <- cowplot::plot_grid(abzmedian.EXT_subtractednonnorm,fbzmedian.EXT_subtractednonnorm, nrow = 1, ncol = 2,labels = c("A","B"),align = "vh",axis = "lrbt",label_size = 12,label_fontfamily = "Arial",rel_widths = c(1,1,1,1),rel_heights = c(1,1,1,1))
+ggsave("~/Documents/Github/ben1_2020_CMD/manuscript/supplementalfigure_6.jpeg",plot = nonnormcurves,device = "jpeg",width = 7.5,height = 4,units = "in")
